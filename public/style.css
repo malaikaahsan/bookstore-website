@@ -1,42 +1,32 @@
-/* CSS Variables for Light & Dark Mode */
+/* CSS Variables for Modern Bookstore Theme */
 :root {
-  --bg: #fdf6f0;
-  --text: #3e2723;
-  --primary: #a47149;
-  --accent: #e2b887;
-  --button: #d97b66;
-  --card-bg: #fff7ed;
-  --navbar-bg: rgba(255,247,237,0.97);
-  --shadow: 0 2px 8px rgba(164,113,73,0.08);
-  --footer-bg: #a47149;
-  --ticker-bg: #e2b887;
-  --ticker-text: #a47149;
-}
-.dark-mode {
-  --bg: #23272f;
-  --text: #f5e9d7;
-  --primary: #e2b887;
-  --accent: #a47149;
-  --button: #d97b66;
-  --card-bg: #2d313a;
-  --navbar-bg: #23272f;
-  --shadow: 0 2px 8px rgba(226,184,135,0.13);
-  --footer-bg: #23272f;
-  --ticker-bg: #a47149;
-  --ticker-text: #fff7ed;
+  --bg: #fff;
+  --text: #2a3019;
+  --primary: #5c6b28; /* Forest green */
+  --accent: #d7be69;  /* Gold */
+  --button: #5c6b28;  /* Forest green */
+  --button-hover: #a47e4f; /* Warm brown */
+  --card-bg: #faf8f3;
+  --navbar-bg: #fff;
+  --navbar-text: #5c6b28;
+  --shadow: 0 2px 12px rgba(92,107,40,0.10);
+  --footer-bg: #5c6b28;
+  --footer-text: #fff;
+  --ticker-bg: #d7be69;
+  --ticker-text: #2a3019;
 }
 html, body {
   width: 100vw;
   overflow-x: hidden;
   box-sizing: border-box;
+  background: var(--bg);
+  color: var(--text);
 }
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
   font-family: 'Montserrat', sans-serif;
-  background: var(--bg);
-  color: var(--text);
   transition: background 0.3s, color 0.3s;
   box-sizing: border-box;
 }
@@ -57,6 +47,7 @@ body {
   transition: box-shadow 0.2s, background 0.3s;
   gap: 4rem;
   box-sizing: border-box;
+  color: var(--navbar-text);
 }
 .logo-with-icon {
   display: flex;
@@ -79,7 +70,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;  /* padding-top: 2.2rem; */
-  color: var(--primary);
+  color: var(--navbar-text);
 }
 .nav-links {
   list-style: none;
@@ -98,9 +89,9 @@ body {
 }
 .nav-links a {
   text-decoration: none;
-  color: var(--primary);
+  color: var(--navbar-text);
   font-weight: 600;
-  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   font-size: 1.1rem;
   padding: 0.5rem 1.2rem;
   border-radius: 8px;
@@ -114,26 +105,8 @@ body {
 }
 .nav-links a:hover, .nav-links a.active {
   background: var(--accent);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(217,123,102,0.13);
-}
-.dark-mode-toggle {
-  background: var(--button);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  cursor: pointer;
-  margin-left: 1.2rem;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.dark-mode-toggle:hover {
-  background: var(--primary);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(215,190,105,0.18);
 }
 .hero {
   position: relative;
@@ -163,6 +136,7 @@ body {
   box-shadow: var(--shadow);
   max-width: 600px;
   margin: 0 auto;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 .hero-logo-title {
   display: flex;
@@ -181,24 +155,26 @@ body {
   margin-bottom: 2rem;
   font-weight: 500;
 }
-.cta-btn, .filter-btn {
+.cta-btn, .filter-btn, .contact-btn {
   background: var(--button);
   color: #fff;
-  padding: 1rem 2.5rem;
+  border: none;
   border-radius: 30px;
   font-size: 1.2rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(217,123,102,0.13);
-  transition: background 0.2s, color 0.2s, transform 0.2s;
-  border: none;
+  box-shadow: 0 2px 8px rgba(92,107,40,0.13);
+  transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
   outline: none;
   display: inline-block;
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;
 }
-.cta-btn:hover, .filter-btn:hover {
-  background: var(--primary);
-  color: var(--accent);
-  transform: scale(1.05);
+.cta-btn:hover, .filter-btn:hover, .contact-btn:hover {
+  background: var(--button-hover);
+  color: #fff;
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(164,126,79,0.18);
 }
 .ticker {
   background: var(--ticker-bg);
@@ -417,7 +393,7 @@ body {
 }
 footer {
   background: var(--footer-bg);
-  color: #fff;
+  color: var(--footer-text);
   padding: 2rem 1rem;
   text-align: center;
 }
@@ -568,8 +544,8 @@ footer {
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .author-card:hover {
-  box-shadow: 0 6px 24px rgba(164,113,73,0.13);
-  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(92,107,40,0.18);
+  transform: translateY(-4px) scale(1.02);
 }
 .author-photo {
   width: 110px;

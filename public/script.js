@@ -42,19 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }, 200);
 });
 
-// Dark mode toggle
-const darkToggle = document.querySelector('.dark-mode-toggle');
-darkToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-  darkToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-});
-// On load, set dark mode if preferred
-if (localStorage.getItem('darkMode') === 'true') {
-  document.body.classList.add('dark-mode');
-  darkToggle.textContent = '☀️';
-}
-
 // Countdown timer
 function startCountdown(durationSeconds) {
   const timerEl = document.getElementById('countdown-timer');
@@ -300,12 +287,6 @@ function filterBooks() {
   renderBooks(filtered);
 }
 
-document.querySelector('.search-filter-form').addEventListener('input', filterBooks);
-document.querySelector('.search-filter-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  filterBooks();
-});
-
 window.addEventListener('DOMContentLoaded', () => {
   // Hero animation
   const hero = document.querySelector('.hero-content');
@@ -400,5 +381,16 @@ window.addEventListener('DOMContentLoaded', () => {
   featuredRightArrow.addEventListener('click', () => slideFeatured(1));
 
   // --- Main books grid for search/filter ---
-  renderBooks(booksData);
+  // Do not show any books by default
+  renderBooks([]);
+
+  // Track if filter has been used
+  let filterUsed = false;
+  document.querySelector('.search-filter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    filterUsed = true;
+    filterBooks();
+  });
+
+  // If filter has not been used, always show all books
 }); 
