@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whismy Pages - Where every story begins</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo-with-icon">
+      <span class="logo-icon">
+        <!-- Simple SVG book logo -->
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="6" width="12" height="24" rx="2" fill="#1abc9c"/>
+          <rect x="21" y="6" width="12" height="24" rx="2" fill="#f39c12"/>
+          <rect x="9" y="10" width="18" height="16" rx="1.5" fill="#fff" stroke="#34495e" stroke-width="2"/>
+        </svg>
+      </span>
+      <span class="logo-text">Whismy Pages</span>
+    </div>
+    <div class="nav-links-container">
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#genres">Shop by Genre</a></li>
+      <li><a href="#new-arrivals">New Arrivals</a></li>
+      <li><a href="#best-sellers">Best Sellers</a></li>
+      <li><a href="#author-spotlights">Author Spotlights</a></li>
+      <li><a href="#contact">Contact </a></li>
+    </ul>
+    </div>
+    <button class="dark-mode-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+  </nav>
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-logo-title">
+        <span class="logo-icon">
+          <!-- Repeat SVG logo for hero -->
+          <svg width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="6" width="12" height="24" rx="2" fill="#1abc9c"/>
+            <rect x="21" y="6" width="12" height="24" rx="2" fill="#f39c12"/>
+            <rect x="9" y="10" width="18" height="16" rx="1.5" fill="#fff" stroke="#34495e" stroke-width="2"/>
+          </svg>
+        </span>
+        <h1 class="logo-text">Whismy Pages</h1>
+      </div>
+      <p class="tagline">Where every story begins</p>
+      <a href="#books" class="cta-btn">Shop Now</a>
+    </div>
+  </header>
+  <div class="ticker">
+    <div class="ticker-content">
+      <span>📈 Trending: </span>
+      <span class="trending-title">The Great Adventure</span> &bull; 
+      <span class="trending-title">Mystery of the Night</span> &bull; 
+      <span class="trending-title">Romance in Paris</span> &bull; 
+      <span class="trending-title">Science Fiction Saga</span> &bull; 
+      <span class="trending-title">Kids' World</span> &bull; 
+      <span class="trending-title">Self-Help Guide</span>
+    </div>
+  </div>
+  <section class="countdown" id="countdown-offer">
+    Sale ends in: <span id="countdown-timer">00:00:00</span>
+  </section>
+  <section class="featured-books" id="books">
+    <h2>Featured Books</h2>
+    <div class="featured-carousel-wrapper">
+      <button class="featured-arrow left" aria-label="Scroll left">&#8592;</button>
+      <div class="featured-carousel">
+        <!-- JS will inject book cards here -->
+      </div>
+      <button class="featured-arrow right" aria-label="Scroll right">&#8594;</button>
+    </div>
+  </section>
+  <section class="search-filter-section">
+    <form class="search-filter-form">
+      <input type="text" class="search-bar" placeholder="Search for books, authors, or topics...">
+      <select class="price-filter">
+        <option value="">Any Price</option>
+        <option value="1">Under $10</option>
+        <option value="2">$10 - $20</option>
+        <option value="3">$20 - $30</option>
+        <option value="4">$30+</option>
+      </select>
+      <select class="ratings-filter">
+        <option value="">Any Rating</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆ & up</option>
+        <option value="3">★★★☆☆ & up</option>
+        <option value="2">★★☆☆☆ & up</option>
+      </select>
+      <button type="submit" class="filter-btn">Filter</button>
+    </form>
+  </section>
+  <section id="genres" style="padding: 4rem 0 2rem 0; background: var(--card-bg); text-align:center;">
+    <h2>Shop by Genre</h2>
+    <div class="genre-tabs">
+      <button class="genre-tab active" data-genre="Fiction">Fiction</button>
+      <button class="genre-tab" data-genre="Mystery">Mystery</button>
+      <button class="genre-tab" data-genre="Romance">Romance</button>
+      <button class="genre-tab" data-genre="Self-help">Self-help</button>
+      <button class="genre-tab" data-genre="Kids">Kids</button>
+      <button class="genre-tab" data-genre="Science Fiction">Science Fiction</button>
+      <button class="genre-tab" data-genre="Biography">Biography</button>
+    </div>
+    <div class="genre-carousel-wrapper">
+      <div class="genre-carousel">
+        <!-- Book cards will be injected here by JS -->
+      </div>
+    </div>
+  </section>
+  <section id="new-arrivals" style="padding: 4rem 0 2rem 0; background: var(--bg); text-align:center;">
+    <h2>New Arrivals</h2>
+    <div class="new-arrivals-grid">
+      <div class="book-card">
+        <div class="book-card-inner">
+          <div class="book-card-front">
+            <img src="https://plus.unsplash.com/premium_photo-1709772918971-bf5958982063?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 1">
+            <h3>Whispers of the Forest</h3>
+            <p>By Willow Green</p>
+          </div>
+          <div class="book-card-back">
+            <h3>Whispers of the Forest</h3>
+            <p>Genre: Fantasy</p>
+            <p>Price: $19</p>
+            <p>Rating: ★★★★☆</p>
+            <p>"A magical tale of nature and adventure."</p>
+          </div>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-card-inner">
+          <div class="book-card-front">
+            <img src="https://plus.unsplash.com/premium_photo-1715300001979-1841b9deb61d?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 2">
+            <h3>Urban Legends</h3>
+            <p>By Max Stone</p>
+          </div>
+          <div class="book-card-back">
+            <h3>Urban Legends</h3>
+            <p>Genre: Mystery</p>
+            <p>Price: $16</p>
+            <p>Rating: ★★★★☆</p>
+            <p>"A gripping collection of city mysteries."</p>
+          </div>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-card-inner">
+          <div class="book-card-front">
+            <img src="https://images.unsplash.com/photo-1709733726063-d01f064eac6c?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 3">
+            <h3>Sunrise Over the Hills</h3>
+            <p>By Emma Dawn</p>
+          </div>
+          <div class="book-card-back">
+            <h3>Sunrise Over the Hills</h3>
+            <p>Genre: Romance</p>
+            <p>Price: $14</p>
+            <p>Rating: ★★★★★</p>
+            <p>"A heartwarming story of love and hope."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="best-sellers" style="padding: 4rem 0 2rem 0; background: var(--card-bg); text-align:center;">
+    <h2>Best Sellers</h2>
+    <div class="best-sellers-grid">
+      <div class="book-card">
+        <div class="book-card-inner">
+          <div class="book-card-front">
+            <img src="https://images.unsplash.com/photo-1544468607-e7b3e848ff87?q=80&w=950&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 1">
+            <h3>The Great Adventure</h3>
+            <p>By John Doe</p>
+          </div>
+          <div class="book-card-back">
+            <h3>The Great Adventure</h3>
+            <p>Genre: Fiction</p>
+            <p>Price: $15</p>
+            <p>Rating: ★★★★☆</p>
+            <p>"An epic journey through uncharted lands."</p>
+          </div>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-card-inner">
+          <div class="book-card-front">
+            <img src="https://images.unsplash.com/photo-1552959932-8d638c6d6b5e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 2">
+            <h3>Mystery of the Night</h3>
+            <p>By Jane Smith</p>
+          </div>
+          <div class="book-card-back">
+            <h3>Mystery of the Night</h3>
+            <p>Genre: Mystery</p>
+            <p>Price: $12</p>
+            <p>Rating: ★★★★☆</p>
+            <p>"A thrilling tale of suspense and intrigue."</p>
+          </div>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-card-inner">
+          <div class="book-card-front">
+            <img src="https://images.unsplash.com/photo-1658133833838-72980f64aada?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 3">
+            <h3>Romance in Paris</h3>
+            <p>By Clara Belle</p>
+          </div>
+          <div class="book-card-back">
+            <h3>Romance in Paris</h3>
+            <p>Genre: Romance</p>
+            <p>Price: $18</p>
+            <p>Rating: ★★★★☆</p>
+            <p>"A beautiful love story set in the City of Light."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="author-spotlights" style="padding: 4rem 0 2rem 0; background: var(--bg); text-align:center;">
+    <h2>Author Spotlights</h2>
+    <div class="author-spotlights-grid">
+      <div class="author-card">
+        <img class="author-photo" src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80" alt="Jane Smith">
+        <h3>Jane Smith</h3>
+        <p class="author-bio">Jane Smith is a bestselling mystery author known for her gripping plots and unforgettable characters. Her latest novel, "Mystery of the Night," has captivated readers worldwide.</p>
+        <button class="author-interview-btn" onclick="alert('Interview with Jane Smith coming soon!')">Read Interview</button>
+      </div>
+      <div class="author-card">
+        <img class="author-photo" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Willow Green">
+        <h3>Willow Green</h3>
+        <p class="author-bio">Willow Green writes enchanting fantasy stories inspired by nature and folklore. Her book "Whispers of the Forest" is a magical journey for readers of all ages.</p>
+        <button class="author-interview-btn" onclick="alert('Interview with Willow Green coming soon!')">Read Interview</button>
+      </div>
+      <div class="author-card">
+        <img class="author-photo" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Max Stone">
+        <h3>Max Stone</h3>
+        <p class="author-bio">Max Stone is a master of urban thrillers and suspense. His collection "Urban Legends" explores the mysteries and secrets hidden in every city.</p>
+        <button class="author-interview-btn" onclick="alert('Interview with Max Stone coming soon!')">Read Interview</button>
+      </div>
+    </div>
+  </section>
+  <section id="contact" style="padding: 4rem 0 2rem 0; background: var(--card-bg); text-align:center;">
+    <h2>Contact</h2>
+    <div class="contact-container">
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for contacting us!');">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="contact-btn">Send Message</button>
+      </form>
+      <div class="contact-info">
+        <h3>Contact Info</h3>
+        <p><strong>Email:</strong> <a href="mailto:info@whismypages.com">info@whismypages.com</a></p>
+        <p><strong>Address:</strong> 123 Book Lane, Storyville, 45678</p>
+      </div>
+    </div>
+  </section>
+  <section class="testimonials">
+    <h2>What Our Readers Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p>"A fantastic selection of books and amazing service!"</p>
+        <span>- Emily R.</span>
+      </div>
+      <div class="testimonial">
+        <p>"I always find something new and exciting at Whismy Pages."</p>
+        <span>- Michael T.</span>
+      </div>
+      <div class="testimonial">
+        <p>"The best online bookstore experience I've had!"</p>
+        <span>- Sarah K.</span>
+      </div>
+    </div>
+  </section>
+  <section class="author-interviews" id="author-interviews">
+    <h2>Author Interviews</h2>
+    <div class="author-interview">
+      <div class="interview-video">
+        <iframe width="100%" height="240" src="https://www.youtube.com/embed/2vj37yeQQHg" title="Author Interview" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="interview-blog">
+        <h3>Interview with Jane Smith</h3>
+        <p><strong>Q:</strong> What inspired you to write "Mystery of the Night"?<br>
+        <strong>A:</strong> I wanted to create a world where every shadow held a secret, and every character had a story to tell. My love for classic mysteries and my own experiences in small towns inspired much of the plot.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 Whismy Pages. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#3b5998"/><path d="M15.36 8.26h-1.36c-.18 0-.36.22-.36.4v1.08h1.72l-.22 1.7h-1.5v4.56h-1.8v-4.56h-1.1v-1.7h1.1v-1.2c0-1.1.7-2.1 2.1-2.1h1.36v1.62z" fill="#fff"/></svg>
+        </a>
+        <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1da1f2"/><path d="M19.46 8.3c-.5.22-1.04.37-1.6.44a2.8 2.8 0 0 0 1.22-1.54 5.6 5.6 0 0 1-1.77.68 2.8 2.8 0 0 0-4.77 2.56A7.94 7.94 0 0 1 5.1 7.1a2.8 2.8 0 0 0 .87 3.74c-.45-.01-.87-.14-1.24-.34v.03a2.8 2.8 0 0 0 2.25 2.75c-.2.06-.42.09-.64.09-.16 0-.3-.01-.45-.04a2.8 2.8 0 0 0 2.62 1.95A5.6 5.6 0 0 1 4 17.29a7.9 7.9 0 0 0 4.29 1.26c5.15 0 7.97-4.27 7.97-7.97 0-.12 0-.24-.01-.36.55-.4 1.03-.9 1.41-1.47z" fill="#fff"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#e4405f"/><rect x="7" y="7" width="10" height="10" rx="3" fill="#fff"/><circle cx="12" cy="12" r="2.5" fill="#e4405f"/><circle cx="16" cy="8" r="1" fill="#e4405f"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html> 
