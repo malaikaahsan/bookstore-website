@@ -261,11 +261,13 @@ function renderBooks(books) {
           <p>Price: $${book.price}</p>
           <p>Rating: ${'★'.repeat(book.rating)}${'☆'.repeat(5-book.rating)}</p>
           <p>"${book.desc}"</p>
+          <button class="add-to-cart-btn">Add to Cart</button>
         </div>
       </div>
     `;
     grid.appendChild(card);
   });
+  setupAddToCartButtons();
 }
 
 function filterBooks() {
@@ -287,6 +289,138 @@ function filterBooks() {
   renderBooks(filtered);
 }
 
+// --- CART FUNCTIONALITY ---
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCartCount() {
+  const cartIcon = document.querySelector('.cart-icon');
+  const count = cart.reduce((sum, item) => sum + item.qty, 0);
+  const svg = cartIcon.querySelector('svg');
+  let text = svg.querySelector('.cart-count-text');
+  if (text) text.textContent = count;
+  if (count > 0) {
+    cartIcon.classList.add('has-items');
+  } else {
+    cartIcon.classList.remove('has-items');
+  }
+}
+
+function renderCart() {
+  const cartItemsDiv = document.querySelector('.cart-items');
+  const cartTotalSpan = document.querySelector('.cart-total');
+  cartItemsDiv.innerHTML = '';
+  let total = 0;
+  if (cart.length === 0) {
+    cartItemsDiv.innerHTML = '<p style="color:var(--primary);text-align:center;">Your cart is empty.</p>';
+    cartTotalSpan.textContent = '$0';
+    return;
+  }
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    const div = document.createElement('div');
+    div.className = 'cart-item-row';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'space-between';
+    div.style.marginBottom = '1rem';
+    div.innerHTML = `
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:600;">${item.title}</div>
+        <div style="font-size:0.95em;color:var(--primary);">$${item.price} x <input type='number' min='1' value='${item.qty}' style='width:40px;text-align:center;border-radius:6px;border:1px solid var(--accent);margin:0 0.3rem;' class='cart-qty-input'></div>
+      </div>
+      <button class='remove-cart-item' style='background:none;border:none;color:var(--primary);font-size:1.3em;cursor:pointer;' title='Remove'>&times;</button>
+    `;
+    // Attach listeners after adding to DOM
+    setTimeout(() => {
+      div.querySelector('.cart-qty-input').addEventListener('change', e => {
+        let val = parseInt(e.target.value);
+        if (isNaN(val) || val < 1) val = 1;
+        item.qty = val;
+        saveCart();
+        renderCart();
+        updateCartCount();
+      });
+      div.querySelector('.remove-cart-item').addEventListener('click', () => {
+        cart = cart.filter(b => b.id !== item.id);
+        saveCart();
+        renderCart();
+        updateCartCount();
+      });
+    }, 0);
+    cartItemsDiv.appendChild(div);
+  });
+  cartTotalSpan.textContent = '$' + total;
+}
+
+function addToCart(book) {
+  const found = cart.find(item => item.id === book.id);
+  if (found) {
+    found.qty++;
+  } else {
+    cart.push({ id: book.id, title: book.title, price: book.price, qty: 1 });
+  }
+  saveCart();
+  updateCartCount();
+  renderCart();
+}
+
+function setupAddToCartButtons() {
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.onclick = function() {
+      const card = btn.closest('.book-card');
+      const title = card.querySelector('h3').textContent;
+      let book = booksData.find(b => b.title === title);
+      
+      if (book) {
+        addToCart({ id: book.title, title: book.title, price: book.price });
+      } else {
+        // Fallback for static cards not in booksData
+        const priceString = Array.from(card.querySelectorAll('.book-card-back p')).find(p => p.textContent.startsWith('Price:'))?.textContent;
+        if (priceString) {
+          const price = parseFloat(priceString.replace('Price: $', ''));
+          addToCart({ id: title, title: title, price: price });
+        }
+      }
+    };
+  });
+}
+
+// Cart sidebar open/close
+const cartIcon = document.querySelector('.cart-icon');
+const cartSidebar = document.querySelector('.cart-sidebar');
+const closeCart = document.querySelector('.close-cart');
+cartIcon.addEventListener('click', () => {
+  cartSidebar.classList.add('open');
+  renderCart();
+});
+closeCart.addEventListener('click', () => {
+  cartSidebar.classList.remove('open');
+});
+// Close cart on outside click (optional)
+document.addEventListener('click', e => {
+  if (cartSidebar.classList.contains('open') && !cartSidebar.contains(e.target) && !cartIcon.contains(e.target)) {
+    cartSidebar.classList.remove('open');
+  }
+});
+// Checkout button
+const checkoutBtn = document.querySelector('.checkout-btn');
+checkoutBtn.addEventListener('click', () => {
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+    return;
+  }
+  alert('Checkout is not implemented. Thank you for shopping with bookaura!');
+});
+// --- END CART FUNCTIONALITY ---
+
+// On load
+updateCartCount();
+renderCart();
+
 window.addEventListener('DOMContentLoaded', () => {
   // Hero animation
   const hero = document.querySelector('.hero-content');
@@ -297,6 +431,23 @@ window.addEventListener('DOMContentLoaded', () => {
     hero.style.opacity = 1;
     hero.style.transform = 'translateY(0)';
   }, 200);
+
+  // Hamburger/Sidebar logic
+  const hamburger = document.querySelector('.hamburger');
+  const sidebar = document.querySelector('.sidebar-nav');
+  const closeSidebar = document.querySelector('.close-sidebar');
+  const sidebarLinks = document.querySelectorAll('.sidebar-links a');
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.add('open');
+  });
+  closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+  });
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+    });
+  });
 
   // --- Shop by Genre carousel logic ---
   const genreTabs = document.querySelectorAll('.genre-tab');
@@ -324,11 +475,13 @@ window.addEventListener('DOMContentLoaded', () => {
             <p>Price: $${book.price}</p>
             <p>Rating: ${'★'.repeat(book.rating)}${'☆'.repeat(5-book.rating)}</p>
             <p>"${book.desc}"</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
           </div>
         </div>
       `;
       genreCarousel.appendChild(card);
     });
+    setupAddToCartButtons();
   }
   genreTabs.forEach(tab => {
     tab.addEventListener('click', function() {
@@ -341,7 +494,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // --- Featured Books carousel logic ---
   let featuredIndex = 0;
-  const FEATURED_VISIBLE = 3;
+  const FEATURED_VISIBLE = 2;
   const featuredCarousel = document.querySelector('.featured-carousel');
   function renderFeaturedCarousel() {
     featuredCarousel.innerHTML = '';
@@ -364,11 +517,13 @@ window.addEventListener('DOMContentLoaded', () => {
             <p>Price: $${book.price}</p>
             <p>Rating: ${'★'.repeat(book.rating)}${'☆'.repeat(5-book.rating)}</p>
             <p>"${book.desc}"</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
           </div>
         </div>
       `;
       featuredCarousel.appendChild(card);
     }
+    setupAddToCartButtons();
   }
   function slideFeatured(dir) {
     featuredIndex = (featuredIndex + dir + booksData.length) % booksData.length;
@@ -383,6 +538,9 @@ window.addEventListener('DOMContentLoaded', () => {
   // --- Main books grid for search/filter ---
   // Do not show any books by default
   renderBooks([]);
+
+  // Attach listeners to static buttons on load
+  setupAddToCartButtons();
 
   // Track if filter has been used
   let filterUsed = false;
