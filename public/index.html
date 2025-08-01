@@ -20,23 +20,25 @@
       </span>
       <span class="logo-text">bookaura</span>
     </div>
-    <button class="hamburger" aria-label="Open navigation" tabindex="0">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <button class="cart-icon" aria-label="View cart">
-      <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M7 22a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM7.2 18h9.6c.8 0 1.5-.5 1.7-1.3l2.1-7.4c.2-.7-.3-1.3-1-1.3H6.2L5.3 4.8A1 1 0 0 0 4.3 4H2" stroke="#5c6b28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="cart-count" cx="20" cy="6" r="8" fill="#d7be69"/><text x="20" y="10" text-anchor="middle" font-size="8" fill="#2a3019" font-family="Montserrat,Arial,sans-serif" class="cart-count-text">0</text></svg>
-    </button>
     <div class="nav-links-container">
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#genres">Shop by Genre</a></li>
-        <li><a href="#new-arrivals">New Arrivals</a></li>
-        <li><a href="#best-sellers">Best Sellers</a></li>
-        <li><a href="#author-spotlights">Author Spotlights</a></li>
-        <li><a href="#contact">Contact </a></li>
-      </ul>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#genres">Shop by Genre</a></li>
+      <li><a href="#new-arrivals">New Arrivals</a></li>
+      <li><a href="#best-sellers">Best Sellers</a></li>
+      <li><a href="#author-spotlights">Author Spotlights</a></li>
+      <li><a href="#contact">Contact </a></li>
+    </ul>
+    </div>
+    <div class="nav-actions">
+      <button class="cart-icon" aria-label="View cart">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M7 22a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM7.2 18h9.6c.8 0 1.5-.5 1.7-1.3l2.1-7.4c.2-.7-.3-1.3-1-1.3H6.2L5.3 4.8A1 1 0 0 0 4.3 4H2" stroke="#5c6b28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="cart-count" cx="20" cy="6" r="8" fill="#d7be69"/><text x="20" y="10" text-anchor="middle" font-size="8" fill="#2a3019" font-family="Montserrat,Arial,sans-serif" class="cart-count-text">0</text></svg>
+      </button>
+      <button class="hamburger" aria-label="Open navigation" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
     <aside class="sidebar-nav">
       <button class="close-sidebar" aria-label="Close navigation">&times;</button>
@@ -60,8 +62,7 @@
       <button class="checkout-btn">Checkout</button>
     </aside>
   </nav>
-  <header class="hero">
-    <div class="hero-bg"></div>
+  <header class="hero immersive-hero">
     <div class="hero-content">
       <div class="hero-logo-title">
         <span class="logo-icon">
@@ -75,7 +76,12 @@
         <h1 class="logo-text">bookaura</h1>
       </div>
       <p class="tagline">Where every story begins</p>
-      <a href="#books" class="cta-btn">Shop Now</a>
+      <a href="#all-books" class="cta-btn">Shop Now</a>
+    </div>
+    <div class="hero-shape-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
     </div>
   </header>
   <div class="ticker">
@@ -144,115 +150,23 @@
       </div>
     </div>
   </section>
-  <section id="new-arrivals" style="padding: 4rem 0 2rem 0; background: var(--bg); text-align:center;">
-    <h2>New Arrivals</h2>
-    <div class="new-arrivals-grid">
-      <div class="book-card">
-        <div class="book-card-inner">
-          <div class="book-card-front">
-            <img src="https://plus.unsplash.com/premium_photo-1709772918971-bf5958982063?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 1">
-            <h3>Whispers of the Forest</h3>
-            <p>By Willow Green</p>
-          </div>
-          <div class="book-card-back">
-            <h3>Whispers of the Forest</h3>
-            <p>Genre: Fantasy</p>
-            <p>Price: $19</p>
-            <p>Rating: ★★★★☆</p>
-            <p>"A magical tale of nature and adventure."</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div class="book-card">
-        <div class="book-card-inner">
-          <div class="book-card-front">
-            <img src="https://plus.unsplash.com/premium_photo-1715300001979-1841b9deb61d?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 2">
-            <h3>Urban Legends</h3>
-            <p>By Max Stone</p>
-          </div>
-          <div class="book-card-back">
-            <h3>Urban Legends</h3>
-            <p>Genre: Mystery</p>
-            <p>Price: $16</p>
-            <p>Rating: ★★★★☆</p>
-            <p>"A gripping collection of city mysteries."</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div class="book-card">
-        <div class="book-card-inner">
-          <div class="book-card-front">
-            <img src="https://images.unsplash.com/photo-1709733726063-d01f064eac6c?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 3">
-            <h3>Sunrise Over the Hills</h3>
-            <p>By Emma Dawn</p>
-          </div>
-          <div class="book-card-back">
-            <h3>Sunrise Over the Hills</h3>
-            <p>Genre: Romance</p>
-            <p>Price: $14</p>
-            <p>Rating: ★★★★★</p>
-            <p>"A heartwarming story of love and hope."</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          </div>
-        </div>
+  <section id="new-arrivals" class="new-arrivals-redesigned">
+    <div class="new-arrivals-slider">
+      <div class="new-arrivals-slides">
+        <!-- JS will inject new arrival slides here -->
       </div>
     </div>
   </section>
-  <section id="best-sellers" style="padding: 4rem 0 2rem 0; background: var(--card-bg); text-align:center;">
-    <h2>Best Sellers</h2>
-    <div class="best-sellers-grid">
-      <div class="book-card">
-        <div class="book-card-inner">
-          <div class="book-card-front">
-            <img src="https://images.unsplash.com/photo-1544468607-e7b3e848ff87?q=80&w=950&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 1">
-            <h3>The Great Adventure</h3>
-            <p>By John Doe</p>
-          </div>
-          <div class="book-card-back">
-            <h3>The Great Adventure</h3>
-            <p>Genre: Fiction</p>
-            <p>Price: $15</p>
-            <p>Rating: ★★★★☆</p>
-            <p>"An epic journey through uncharted lands."</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          </div>
-        </div>
+  <section id="best-sellers" class="best-sellers-redesigned">
+    <div class="best-sellers-container">
+      <div class="best-sellers-main-book">
+        <!-- JS will inject the featured best seller here -->
       </div>
-      <div class="book-card">
-        <div class="book-card-inner">
-          <div class="book-card-front">
-            <img src="https://images.unsplash.com/photo-1552959932-8d638c6d6b5e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 2">
-            <h3>Mystery of the Night</h3>
-            <p>By Jane Smith</p>
-          </div>
-          <div class="book-card-back">
-            <h3>Mystery of the Night</h3>
-            <p>Genre: Mystery</p>
-            <p>Price: $12</p>
-            <p>Rating: ★★★★☆</p>
-            <p>"A thrilling tale of suspense and intrigue."</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div class="book-card">
-        <div class="book-card-inner">
-          <div class="book-card-front">
-            <img src="https://images.unsplash.com/photo-1658133833838-72980f64aada?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Book 3">
-            <h3>Romance in Paris</h3>
-            <p>By Clara Belle</p>
-          </div>
-          <div class="book-card-back">
-            <h3>Romance in Paris</h3>
-            <p>Genre: Romance</p>
-            <p>Price: $18</p>
-            <p>Rating: ★★★★☆</p>
-            <p>"A beautiful love story set in the City of Light."</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          </div>
-        </div>
+      <div class="best-sellers-list-container">
+        <h2>Top Best Sellers</h2>
+        <ul class="best-sellers-list">
+          <!-- JS will inject the list of best sellers here -->
+        </ul>
       </div>
     </div>
   </section>

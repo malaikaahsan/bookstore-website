@@ -13,23 +13,6 @@ navLinks.forEach(link => {
   });
 });
 
-// Highlight active nav link on scroll
-const sectionIds = ['#genres', '#new-arrivals', '#best-sellers', '#author-spotlights', '#contact'];
-const sectionElements = sectionIds.map(id => document.querySelector(id));
-window.addEventListener('scroll', () => {
-  let scrollPos = window.scrollY + 120;
-  let activeIdx = -1;
-  sectionElements.forEach((section, idx) => {
-    if (section && section.offsetTop <= scrollPos) {
-      activeIdx = idx;
-    }
-  });
-  navLinks.forEach(link => link.classList.remove('active'));
-  if (activeIdx !== -1) {
-    navLinks[activeIdx + 1].classList.add('active'); // +1 to skip Home
-  }
-});
-
 // Hero animation on load
 window.addEventListener('DOMContentLoaded', () => {
   const hero = document.querySelector('.hero-content');
@@ -321,39 +304,50 @@ function renderCart() {
   }
   cart.forEach(item => {
     total += item.price * item.qty;
+    const book = booksData.find(b => b.title === item.title);
     const div = document.createElement('div');
     div.className = 'cart-item-row';
-    div.style.display = 'flex';
-    div.style.alignItems = 'center';
-    div.style.justifyContent = 'space-between';
-    div.style.marginBottom = '1rem';
     div.innerHTML = `
-      <div style="flex:1;min-width:0;">
-        <div style="font-weight:600;">${item.title}</div>
-        <div style="font-size:0.95em;color:var(--primary);">$${item.price} x <input type='number' min='1' value='${item.qty}' style='width:40px;text-align:center;border-radius:6px;border:1px solid var(--accent);margin:0 0.3rem;' class='cart-qty-input'></div>
+      <img src="${book ? book.img : 'https://via.placeholder.com/60x80'}" alt="${item.title}" class="cart-item-img">
+      <div class="cart-item-details">
+        <div class="cart-item-title">${item.title}</div>
+        <div class="cart-item-price">$${item.price}</div>
+        <div class="cart-item-qty-controls">
+          Qty: <input type='number' min='1' value='${item.qty}' class='cart-qty-input' data-book-id="${item.id}">
+        </div>
       </div>
-      <button class='remove-cart-item' style='background:none;border:none;color:var(--primary);font-size:1.3em;cursor:pointer;' title='Remove'>&times;</button>
+      <button class='remove-cart-item' data-book-id="${item.id}" title='Remove'>&times;</button>
     `;
-    // Attach listeners after adding to DOM
-    setTimeout(() => {
-      div.querySelector('.cart-qty-input').addEventListener('change', e => {
+    cartItemsDiv.appendChild(div);
+  });
+  cartTotalSpan.textContent = '$' + total.toFixed(2);
+}
+
+function setupCartListeners() {
+  const cartItemsDiv = document.querySelector('.cart-items');
+  cartItemsDiv.addEventListener('click', e => {
+    if (e.target.classList.contains('remove-cart-item')) {
+      const bookId = e.target.dataset.bookId;
+      cart = cart.filter(b => b.id !== bookId);
+      saveCart();
+      renderCart(); // Re-render without closing
+      updateCartCount();
+    }
+  });
+  cartItemsDiv.addEventListener('change', e => {
+    if (e.target.classList.contains('cart-qty-input')) {
+      const bookId = e.target.dataset.bookId;
+      const item = cart.find(b => b.id === bookId);
+      if (item) {
         let val = parseInt(e.target.value);
         if (isNaN(val) || val < 1) val = 1;
         item.qty = val;
         saveCart();
-        renderCart();
+        renderCart(); // Re-render without closing
         updateCartCount();
-      });
-      div.querySelector('.remove-cart-item').addEventListener('click', () => {
-        cart = cart.filter(b => b.id !== item.id);
-        saveCart();
-        renderCart();
-        updateCartCount();
-      });
-    }, 0);
-    cartItemsDiv.appendChild(div);
+      }
+    }
   });
-  cartTotalSpan.textContent = '$' + total;
 }
 
 function addToCart(book) {
@@ -361,7 +355,7 @@ function addToCart(book) {
   if (found) {
     found.qty++;
   } else {
-    cart.push({ id: book.id, title: book.title, price: book.price, qty: 1 });
+    cart.push({ id: book.id, title: book.title, price: book.price, qty: 1, img: book.img });
   }
   saveCart();
   updateCartCount();
@@ -421,6 +415,92 @@ checkoutBtn.addEventListener('click', () => {
 updateCartCount();
 renderCart();
 
+function renderBestSellers() {
+  const mainBookContainer = document.querySelector('.best-sellers-main-book');
+  const listContainer = document.querySelector('.best-sellers-list');
+  const bestSellers = booksData.slice(0, 5); // Get top 5 best sellers
+
+  function displayBook(book) {
+    mainBookContainer.innerHTML = `
+      <div class="badge">Books of the Month</div>
+      <img src="${book.img}" alt="${book.title}">
+      <p>By ${book.author}</p>
+      <h3>${book.title}</h3>
+      <p class="book-description">"${book.desc}"</p>
+      <button class="add-to-cart-btn" data-book-id="${book.title}">Add to Cart</button>
+    `;
+    // Re-attach listener for the new button
+    mainBookContainer.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+      const bookId = this.dataset.bookId;
+      const bookToAdd = booksData.find(b => b.title === bookId);
+      if (bookToAdd) {
+        addToCart({ id: bookToAdd.title, title: bookToAdd.title, price: bookToAdd.price });
+      }
+    });
+  }
+
+  listContainer.innerHTML = '';
+  bestSellers.forEach((book, index) => {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `<span>${index + 1}.</span> ${book.title}`;
+    listItem.addEventListener('mouseover', () => displayBook(book));
+    listContainer.appendChild(listItem);
+  });
+
+  // Display the first best seller initially
+  if (bestSellers.length > 0) {
+    displayBook(bestSellers[0]);
+  }
+}
+
+function renderNewArrivalsSlider() {
+  const slidesContainer = document.querySelector('.new-arrivals-slides');
+  const newArrivals = booksData.slice(5, 9); // Get 4 new arrivals
+  slidesContainer.innerHTML = '';
+  newArrivals.forEach(book => {
+    const slide = document.createElement('div');
+    slide.className = 'new-arrival-slide';
+    slide.innerHTML = `
+      <img src="${book.img}" class="slide-bg" alt="${book.title}">
+      <div class="slide-content">
+        <div class="badge" style="background:var(--accent);color:var(--text);margin-bottom:1rem;">New Arrival</div>
+        <h2>${book.title}</h2>
+        <p>By ${book.author}</p>
+        <p>"${book.desc}"</p>
+        <button class="add-to-cart-btn cta-btn" data-book-id="${book.title}">Add to Cart</button>
+      </div>
+    `;
+    slidesContainer.appendChild(slide);
+  });
+
+  // Slider logic
+  let currentIndex = 0;
+  const slides = document.querySelectorAll('.new-arrival-slide');
+  const totalSlides = slides.length;
+  function showSlide(index) {
+    slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+  }
+  // Remove event listeners for next/prev arrows
+
+  // Auto-scroll
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    showSlide(currentIndex);
+  }, 5000);
+
+  // Attach cart listeners
+  slidesContainer.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const bookId = this.dataset.bookId;
+      const bookToAdd = booksData.find(b => b.title === bookId);
+      if (bookToAdd) {
+        addToCart({ id: bookToAdd.title, title: bookToAdd.title, price: bookToAdd.price });
+      }
+    });
+  });
+}
+
+// In DOMContentLoaded, call renderNewArrivalsSlider()
 window.addEventListener('DOMContentLoaded', () => {
   // Hero animation
   const hero = document.querySelector('.hero-content');
@@ -541,6 +621,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Attach listeners to static buttons on load
   setupAddToCartButtons();
+  renderBestSellers(); // Call renderBestSellers here
+  renderNewArrivalsSlider(); // Call renderNewArrivalsSlider here
 
   // Track if filter has been used
   let filterUsed = false;
@@ -551,4 +633,5 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // If filter has not been used, always show all books
+  setupCartListeners();
 }); 
